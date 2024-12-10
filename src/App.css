@@ -71,20 +71,31 @@ body {
 
 .article {
   background: #fff;
-  padding: 20px;
+  padding: 5%;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 300px;
+  overflow: hidden;
+  margin-bottom: 3%;
 }
 
-.list {
-  margin: 10px 0;
-  padding-left: 20px;
+.article .text {
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
 }
 
 .projectLink {
   color: #007acc;
   text-decoration: none;
+  margin-top: auto;
+  display: block;
 }
 
 .projectLink:hover {
@@ -101,17 +112,18 @@ body {
   color: #333;
 }
 
-.mediaGrid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-  gap: 20px;
-}
+
 
 .mediaBlock {
   background: #fff;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+
 }
 
 .mediaImage {
@@ -127,23 +139,34 @@ body {
 .mediaDescription {
   font-size: 0.9rem;
   color: #555;
+  flex: 1 1 auto;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp:3;
+  -webkit-box-orient: vertical;
 }
 
 .mediaLink {
   display: inline-block;
-  margin-top: 10px;
+  margin-top: auto;
   color: #007acc;
   text-decoration: none;
 }
-
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(500px, 1ffr));
+  gap: 20px;
+}
 .mediaLink:hover {
   text-decoration: underline;
 }
 
 .aside {
-  width: 100%;
-  padding: 20px;
   background: #f1f1f1;
+  padding: 20px;
+  border-radius: 8px;
+ min-width: 300px;
 }
 
 .asideTitle {
@@ -178,7 +201,6 @@ body {
   text-decoration: underline;
 }
 
-/* Responsive Styles */
 @media (min-width: 600px) {
   .profile {
     flex-direction: row;
@@ -194,7 +216,7 @@ body {
   }
 
   .aside {
-    width: 25%;
+    width: 100%;
   }
 }
 
@@ -204,7 +226,20 @@ body {
     gap: 40px;
   }
 
+  .aside {
+    width: 25%;
+    order: 1;
+  }
+
   .mediaGrid {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 599px) {
+  .aside {
+    width: 100%;
+    order: 2;
+    margin-top: 20px;
   }
 }
