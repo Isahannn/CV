@@ -296,7 +296,7 @@ function App() {
           <section className="asideSection">
             <p className="asideText">Minsk, Belarus 🇧🇾</p>
             <a href="mailto:isahangasanov84@gmail.com" className="email">
-              isahangasanov84@gmail.com ✉️
+             mail ✉️
             </a>
           </section>
           <section>
