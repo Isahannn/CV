@@ -1,0 +1,177 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333;
+  line-height: 1.6;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  background-color: #e0f7ff;
+  width: 100%;
+  padding: 20px;
+  text-align: center;
+  position: relative;
+}
+
+.profile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.title {
+  font-size: 2rem;
+  color: #007acc;
+  margin-left: 20px;
+}
+
+.photo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.main {
+  width: 100%;
+  padding: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.text {
+  font-size: 1rem;
+  color: #555;
+}
+
+.experience {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.article {
+  background: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+}
+
+.list {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.projectLink {
+  color: #007acc;
+  text-decoration: none;
+}
+
+.projectLink:hover {
+  text-decoration: underline;
+}
+
+.media-section {
+  margin-top: 40px;
+}
+
+.mediaTitle {
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.mediaBlock {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+}
+
+.mediaImage {
+  width: 100%;
+  border-radius: 8px;
+}
+
+.mediaName {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.mediaDescription {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.mediaLink {
+  display: inline-block;
+  margin-top: 10px;
+  color: #007acc;
+  text-decoration: none;
+}
+
+.mediaLink:hover {
+  text-decoration: underline;
+}
+
+.aside {
+  width: 100%;
+  padding: 20px;
+  background: #f1f1f1;
+}
+
+.asideTitle {
+  font-size: 1.2rem;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.ul {
+  padding-left: 20px;
+}
+
+.mb-2 {
+  margin-bottom: 10px;
+}
+
+.footer {
+  background: #e0f7ff;
+  width: 100%;
+  padding: 15px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footerLink {
+  margin: 0 10px;
+  color: #007acc;
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  text-decoration: underline;
+}
