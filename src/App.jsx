@@ -304,8 +304,6 @@ function App() {
             <a href="mailto:isahangasanov84@gmail.com" className="email">
             isahangasanov84@gmail.com ✉️
             </a>
-            <br></br>
-            <a href="tel:+375293973356" className="tel">+375293973356📞</a>
           </section>
           <section>
             <h2 className="asideTitle">Education</h2>
