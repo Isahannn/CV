@@ -12,14 +12,11 @@ import GIF8 from "./assets/Гифка из онлайн конвертера.g
 function App() {
   return (
     <div className="container">
-      {" "}
       <header className="header">
-        {" "}
         <div className="profile">
-          {" "}
-          <img src={isa} alt="Profile Photo" className="photo" />{" "}
-          <h1 className="title">Isahan Gasanov</h1>{" "}
-        </div>{" "}
+          <img src={isa} alt="Profile Photo" className="photo" />
+          <h1 className="title">Isahan Gasanov</h1>
+        </div>
       </header>
       <main className="main">
         <section className="content">
@@ -128,127 +125,29 @@ function App() {
           <section className="media-section">
             <h2 className="mediaTitle">Project Showcase</h2>
             <div className="mediaGrid">
-              <div className="mediaBlock">
-                <img src={GIF1} alt="Project 1" className="mediaImage" />
-                <h3 className="mediaName">API(JS)</h3>
-                <p className="mediaDescription">
-                  User Albums SPA is a multi-page web application built as a
-                  Single Page Application (SPA). It uses hash-based routing to
-                  display user lists, user albums, and album photos with
-                  infinite scroll. The project is structured for clarity and
-                  maintainability with separate layers for rendering, data
-                  management, and main logic.
-                </p>
-                <a
-                  href="https://github.com/Isahannn/API"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mediaLink"
-                >
-                  View Project
-                </a>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF2} alt="Project 2" className="mediaImage" />
-                <h3 className="mediaName">TypeScript</h3>
-                <p className="mediaDescription">
-                  Filterable List - TypeScript Edition is a project that
-                  rewrites an asynchronous Filterable List application from
-                  JavaScript to TypeScript for improved type safety and
-                  maintainability. It features asynchronous data fetching,
-                  user-based filtering, robust error handling, and a modular
-                  architecture, addressing all previously noted issues.
-                </p>
-                <a
-                  href="https://github.com/Isahannn/TypeScript.git"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mediaLink"
-                >
-                  View Project
-                </a>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF3} alt="Project 3" className="mediaImage" />
-                <h3 className="mediaName">CV-BSU-WEB-Designed</h3>
-                <p className="mediaDescription">
-                  My Unique Resume from BSU Explore my web development journey
-                  with projects from BSU: CSS Gallery Interactive Map Piggy
-                  Website Musical Apps Data Tables Business Card Landing Page
-                  Block Layout and Transitions Discover, enjoy, and connect!
-                  Resources
-                </p>
-                <a
-                  href="https://github.com/Isahannn/Isahannn-CV-BSU-WEB-Designed.git"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mediaLink"
-                >
-                  View Project
-                </a>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF4} alt="Project 4" className="mediaImage" />
-                <h3 className="mediaName">TODO Lis</h3>
-                <p className="mediaDescription">
-                  TODO List Application is designed to help users add, manage,
-                  and filter tasks with specific requirements. It features input
-                  fields for task title and description, status checkboxes,
-                  delete options, and a filter for incomplete tasks. The
-                  application is structured into modular components, ensures
-                  concise naming, and maintains a clean, user-friendly
-                  interface.
-                </p>
-                <a
-                  href="https://github.com/Isahannn/Todo-List-Gasanov.git"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mediaLink"
-                >
-                  View Project
-                </a>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF5} alt="Project 5" className="mediaImage" />
-                <h3 className="mediaName">Notion</h3>
-                <p className="mediaDescription">
-                  Collaborative Notes Application is a sleek, multi-user
-                  note-taking app built with React, TailwindCSS, and
-                  json-server. It features user management, robust notes
-                  management (create, edit, delete), pagination, search,
-                  sorting, and responsive design. Perfect for organizing
-                  thoughts effortlessly and exploring modern development
-                  practices. Feel free to contribute and share feedback!
-                </p>
-                <a
-                  href="https://github.com/Isahannn/todos-server.git"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mediaLink"
-                >
-                  View Project
-                </a>
-              </div>
-              <div className="mediaBlock">
+            <div className="mediaBlock">
                 <img src={GIF6} alt="Project 6" className="mediaImage" />
                 <h3 className="mediaName">Notion(REDUX)</h3>
                 <p className="mediaDescription">
-                  **Collaborative Notes Application is a multi-user note-taking
+                  Collaborative Notes Application is a multi-user note-taking
                   app built with React, TailwindCSS, Redux, and json-server. It
-                  features user management (registration, login, logout), robust
-                  notes management (create, edit, delete), pagination, search,
-                  sorting, and responsive design. Perfect for modern development
-                  practices and exploring advanced tech stack functionalities.
+                  features user management, robust notes management, pagination,
+                  search, sorting, and responsive design. Perfect for modern
+                  development practices and exploring advanced tech stack
+                  functionalities.
                 </p>
-                <a
-                  href="https://github.com/Isahannn/todos-server-redux-.git"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mediaLink"
-                >
-                  View Project
-                </a>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/todos-server-redux-.git"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
               </div>
+                          
               <div className="mediaBlock">
                 <img src={GIF7} alt="Project 7" className="mediaImage" />
                 <h3 className="mediaName">MyParking</h3>
@@ -258,36 +157,143 @@ function App() {
                   on available parking spaces, providing users with an
                   efficient, user-friendly interface for locating parking spots.
                 </p>
-                <a
-                  href="https://github.com/Isahannn/SmartParking-hackathon.git"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mediaLink"
-                >
-                  View Project
-                </a>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/SmartParking-hackathon.git"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
+              </div>
+              <div className="mediaBlock">
+                <img src={GIF1} alt="Project 1" className="mediaImage" />
+                <h3 className="mediaName">API(JS)</h3>
+                <p className="mediaDescription">
+                  User Albums SPA is a multi-page web application built as a
+                  Single Page Application (SPA). It uses hash-based routing to
+                  display user lists, user albums, and album photos with
+                  infinite scroll. The project is structured for clarity and
+                  maintainability.
+                </p>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/API"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
+              </div>
+              <div className="mediaBlock">
+                <img src={GIF2} alt="Project 2" className="mediaImage" />
+                <h3 className="mediaName">TypeScript</h3>
+                <p className="mediaDescription">
+                  Filterable List - TypeScript Edition rewrites an asynchronous
+                  Filterable List application from JavaScript to TypeScript for
+                  improved type safety and maintainability. It features
+                  asynchronous data fetching, user-based filtering, robust error
+                  handling, and a modular architecture.
+                </p>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/TypeScript.git"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
+              </div>
+              <div className="mediaBlock">
+                <img src={GIF3} alt="Project 3" className="mediaImage" />
+                <h3 className="mediaName">CV-BSU-WEB-Designed</h3>
+                <p className="mediaDescription">
+                  My Unique Resume from BSU features projects such as CSS
+                  Gallery, Interactive Map, Piggy Website, Musical Apps, Data
+                  Tables, Business Card, Landing Page, and Block Layout and
+                  Transitions. This showcases my web development journey and the
+                  skills I've developed.
+                </p>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/Isahannn-CV-BSU-WEB-Designed.git"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
+              </div>
+              <div className="mediaBlock">
+                <img src={GIF4} alt="Project 4" className="mediaImage" />
+                <h3 className="mediaName">TODO list</h3>
+                <p className="mediaDescription">
+                  TODO List Application helps users add, manage, and filter
+                  tasks. It features input fields for task title and
+                  description, status checkboxes, delete options, and a filter
+                  for incomplete tasks. The application is structured into
+                  modular components with a clean interface.
+                </p>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/Todo-List-Gasanov.git"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
+              </div>
+              <div className="mediaBlock">
+                <img src={GIF5} alt="Project 5" className="mediaImage" />
+                <h3 className="mediaName">Notion</h3>
+                <p className="mediaDescription">
+                  Collaborative Notes Application is a multi-user note-taking
+                  app built with React, TailwindCSS, and json-server. It
+                  features user management, robust notes management, pagination,
+                  search, sorting, and responsive design. Perfect for organizing
+                  thoughts and exploring modern development practices.
+                </p>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/todos-server.git"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
               </div>
               <div className="mediaBlock">
                 <img src={GIF8} alt="Project 8" className="mediaImage" />
-                <h3 className="mediaName">Todo with filtres</h3>
+                <h3 className="mediaName">Todo with filters</h3>
                 <p className="mediaDescription">
                   Todoist Application with Advanced Task Filtering is a task
                   management app with complex filtering capabilities. Built with
                   React and styled using TailwindCSS, CSS modules, or SCSS
                   modules, it allows for creating, managing, and filtering tasks
-                  with ease. The app supports advanced filters like hiding
-                  completed tasks, searching by title/description, filtering by
-                  severity, and filtering by tags. The application is responsive
-                  and optimized for performance.
+                  with ease. The app supports advanced filters and is optimized
+                  for performance.
                 </p>
-                <a
-                  href="https://github.com/Isahannn/Todoist.git"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mediaLink"
-                >
-                  View Project
-                </a>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/Todoist.git"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
               </div>
             </div>
           </section>
@@ -296,8 +302,10 @@ function App() {
           <section className="asideSection">
             <p className="asideText">Minsk, Belarus 🇧🇾</p>
             <a href="mailto:isahangasanov84@gmail.com" className="email">
-             mail ✉️
+            isahangasanov84@gmail.com ✉️
             </a>
+            <br></br>
+            <a href="tel:+375293973356" className="tel">+375293973356📞</a>
           </section>
           <section>
             <h2 className="asideTitle">Education</h2>
@@ -311,9 +319,15 @@ function App() {
             <ul className="ul">
               <li className="mb-2">HTML, CSS, JavaScript</li>
               <li className="mb-2">React, Redux</li>
+              <li className="mb-2">Redux--thunk</li>
               <li className="mb-2">Python, Django</li>
               <li className="mb-2">Figma, Adobe XD</li>
               <li className="mb-2">Git, GitHub</li>
+              <li className="mb-2">zod</li>
+              <li className="mb-2">TailwindCSS</li>
+              <li className="mb-2">shortid</li>
+              <li className="mb-2">Chance</li>
+              <li className="mb-2">CSS Modules</li>
             </ul>
           </section>
           <section>
