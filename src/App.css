@@ -70,8 +70,9 @@ body {
 }
 
 .article {
+
   background: #fff;
-  padding: 5%;
+  padding:10%;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -112,8 +113,6 @@ body {
   color: #333;
 }
 
-
-
 .mediaBlock {
   background: #fff;
   border-radius: 8px;
@@ -122,8 +121,6 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-
-
 }
 
 .mediaImage {
@@ -143,7 +140,7 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
-  -webkit-line-clamp:3;
+  -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
 
@@ -166,7 +163,7 @@ body {
   background: #f1f1f1;
   padding: 20px;
   border-radius: 8px;
- min-width: 300px;
+  min-width: 300px;
 }
 
 .asideTitle {
