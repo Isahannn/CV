@@ -10,6 +10,9 @@ import GIF7 from "./assets/Gif from Online Converting (2).gif";
 import GIF8 from "./assets/Гифка из онлайн конвертера.gif";
 
 function App() {
+  const handlePrint = () => {
+    window.print();
+  };
   return (
     <div className="container">
       <header className="header">
@@ -17,6 +20,12 @@ function App() {
           <img src={isa} alt="Profile Photo" className="photo" />
           <h1 className="title">Isahan Gasanov</h1>
         </div>
+        <div  class="printButtonWrapper">
+        <button onClick={handlePrint} className="printButton">
+          Print
+        </button>
+        </div>
+
       </header>
       <main className="main">
         <section className="content">
@@ -125,7 +134,7 @@ function App() {
           <section className="media-section">
             <h2 className="mediaTitle">Project Showcase</h2>
             <div className="mediaGrid">
-            <div className="mediaBlock">
+              <div className="mediaBlock">
                 <img src={GIF6} alt="Project 6" className="mediaImage" />
                 <h3 className="mediaName">Notion(REDUX)</h3>
                 <p className="mediaDescription">
@@ -147,7 +156,7 @@ function App() {
                   </a>
                 </div>
               </div>
-                          
+
               <div className="mediaBlock">
                 <img src={GIF7} alt="Project 7" className="mediaImage" />
                 <h3 className="mediaName">MyParking</h3>
@@ -302,7 +311,7 @@ function App() {
           <section className="asideSection">
             <p className="asideText">Minsk, Belarus 🇧🇾</p>
             <a href="mailto:isahangasanov84@gmail.com" className="email">
-            isahangasanov84@gmail.com ✉️
+              isahangasanov84@gmail.com ✉️
             </a>
           </section>
           <section>
