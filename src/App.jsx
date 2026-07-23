@@ -1,5 +1,5 @@
 import "./App.css";
-import isa from "./assets/Файл IMG 6311.jpg";
+import isa from "./assets/IMG6311.jpg";
 import GIF1 from "./assets/Создание GIF анимации.gif";
 import GIF2 from "./assets/Создание GIF анимации (1).gif";
 import GIF3 from "./assets/Gif from Online Converting.gif";
