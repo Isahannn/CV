@@ -8,6 +8,7 @@ import GIF5 from "./assets/GIF Animation.gif";
 import GIF6 from "./assets/Gif from Online Converting (1).gif";
 import GIF7 from "./assets/Gif from Online Converting (2).gif";
 import GIF8 from "./assets/Гифка из онлайн конвертера.gif";
+import GIF9 from "./assets/гиф9.gif ";
 import { useTranslation } from "react-i18next";
 
 function App() {
@@ -17,43 +18,43 @@ function App() {
   };
   return (
     <div className="container">
-    <header className="header">
-  <div className="profile">
-    <img src={isa} alt="Isahan Gasanov" className="photo" />
+      <header className="header">
+        <div className="profile">
+          <img src={isa} alt="Isahan Gasanov" className="photo" />
 
-    <div className="heroText">
-      <h1 className="title">Isahan Gasanov</h1>
+          <div className="heroText">
+            <h1 className="title">Isahan Gasanov</h1>
 
-      <p className="subtitle">
-        Frontend Developer | React | TypeScript | Django
-      </p>
+            <p className="subtitle">
+              Frontend Developer | React | TypeScript | Django
+            </p>
 
-      <div className="heroButtons">
-        <button onClick={handlePrint} className="printButton">
-          {t("download")}
-        </button>
+            <div className="heroButtons">
+              <button onClick={handlePrint} className="printButton">
+                {t("download")}
+              </button>
 
-        <select
-          className="languageSelect"
-          onChange={(e) => i18n.changeLanguage(e.target.value)}
-          defaultValue={i18n.language}
-        >
-          <option value="en">🇬🇧 English</option>
-          <option value="ru">🇷🇺 Русский</option>
-        </select>
-      </div>
-    </div>
-  </div>
-</header> 
-     <select
-  className="languageSelect"
-  aria-label="Language"
-  onChange={(e) => i18n.changeLanguage(e.target.value)}
-  defaultValue={i18n.language}
->
-  <option value="en">English</option>
-  <option value="ru">Русский</option>
-</select>
+              <select
+                className="languageSelect"
+                onChange={(e) => i18n.changeLanguage(e.target.value)}
+                defaultValue={i18n.language}
+              >
+                <option value="en">🇬🇧 English</option>
+                <option value="ru">🇷🇺 Русский</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </header>
+      <select
+        className="languageSelect"
+        aria-label="Language"
+        onChange={(e) => i18n.changeLanguage(e.target.value)}
+        defaultValue={i18n.language}
+      >
+        <option value="en">English</option>
+        <option value="ru">Русский</option>
+      </select>
       <main className="main">
         <section className="content">
           <section className="section">
@@ -183,25 +184,25 @@ function App() {
                   </a>
                 </div>
               </div>
-          <div className="mediaBlock">
-            <img src={GIF1} alt='Project 8' className="mediaImage"/>
-            <h3 className="mediaName"> Pose Analyz </h3>
-            <p className="mediaDescription">A human pose analysis application based on datasets,
-             designed to detect body keypoints, process images, 
-             and analyze human movements using modern computer
-              vision techniques.
-              </p>
-              <div className="mediaLinkContainer">
-              <a
-              href="https://github.com/Isahannn/Fitness-app.git"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="mediaLink"
-              >
-              View Project
-              </a>
-            </div>
-          </div>
+              <div className="mediaBlock">
+                <img src={GIF9} alt="Project 8" className="mediaImage" />
+                <h3 className="mediaName"> Pose Analyz </h3>
+                <p className="mediaDescription">
+                  A human pose analysis application based on datasets, designed
+                  to detect body keypoints, process images, and analyze human
+                  movements using modern computer vision techniques.
+                </p>
+                <div className="mediaLinkContainer">
+                  <a
+                    href="https://github.com/Isahannn/Fitness-app.git"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mediaLink"
+                  >
+                    View Project
+                  </a>
+                </div>
+              </div>
               <div className="mediaBlock">
                 <img src={GIF7} alt="Project 7" className="mediaImage" />
                 <h3 className="mediaName">MyParking</h3>
