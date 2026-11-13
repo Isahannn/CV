@@ -1,9 +1,79 @@
 {
-  "print": "Print",
-  "work": "Work Experience",
-  "education": "Education",
-  "skills": "Technical Skills",
-  "languages": "Languages",
-  "interests": "Interests",
-  "projects": "Project Showcase"
+  "download": "Download PDF",
+  "nav": { "about": "About", "experience": "Experience", "projects": "Projects", "skills": "Skills" },
+  "hero": {
+    "role": "Backend Developer",
+    "typed": [
+      "Python · Django · REST API",
+      "Clean data models & API contracts",
+      "Scalable, maintainable services"
+    ],
+    "cta": "View projects",
+    "contact": "Get in touch"
+  },
+  "about": {
+    "title": "About",
+    "text": "Backend developer focused on Python and Django. I design and build server-side applications and RESTful APIs with clean data models and reliable integration between services and clients. Having worked on both sides of the stack, I know what front-end teams need from an API and deliver contracts that are easy to consume. Studying at the Mechanics-Mathematics Faculty of BSU gives me a strong foundation in algorithms and problem solving."
+  },
+  "experience": {
+    "title": "Experience",
+    "items": [
+      {
+        "role": "Freelance Backend Developer",
+        "period": "2019 — 2024",
+        "bullets": [
+          "Built back-end services and RESTful APIs with Python and Django for client web applications.",
+          "Designed endpoints and data contracts that front-end apps consume easily.",
+          "Structured projects for scalability, readability and long-term maintainability.",
+          "Turned client requirements into effective technical solutions.",
+          "Built React interfaces on top of my own APIs to deliver features end to end."
+        ]
+      },
+      {
+        "role": "BSU Student Developer",
+        "period": "2023 — Present",
+        "bullets": [
+          "Built data-driven apps with filtering, search, pagination and validation on top of a REST API.",
+          "Developed a Python human pose analysis application working with datasets and images.",
+          "Implemented async data fetching, error handling and request validation (zod).",
+          "Built a real-time parking availability service (MyParking) in a team at a hackathon."
+        ]
+      }
+    ]
+  },
+  "projects": {
+    "title": "Projects",
+    "view": "View on GitHub",
+    "items": {
+      "parking": "Real-time parking availability service built at a hackathon. React + Yandex Maps API client showing free parking spots live.",
+      "pose": "Human pose analysis application: detects body keypoints, processes images and analyzes movement using computer vision on datasets.",
+      "notion": "Multi-user notes app on a REST API (json-server): user management, notes CRUD, pagination, search, sorting. State handled with Redux.",
+      "ts": "Async filterable list rewritten from JavaScript to TypeScript: typed data fetching, user-based filtering, robust error handling."
+    }
+  },
+  "skills": {
+    "title": "Skills",
+    "groups": {
+      "backend": "Backend",
+      "lang": "Languages",
+      "tools": "Tools",
+      "front": "Front-end integration"
+    }
+  },
+  "education": {
+    "title": "Education",
+    "school": "Belarusian State University",
+    "faculty": "Mechanics-Mathematics Faculty",
+    "period": "2023 — now"
+  },
+  "languages": {
+    "title": "Languages",
+    "items": [
+      { "name": "Russian", "level": "C1", "value": 90 },
+      { "name": "Azerbaijani", "level": "C1", "value": 90 },
+      { "name": "Turkish", "level": "B2", "value": 70 },
+      { "name": "English", "level": "B2", "value": 70 }
+    ]
+  },
+  "location": "Minsk, Belarus"
 }

@@ -1,444 +1,433 @@
+/* eslint-disable react/prop-types */
 import "./App.css";
-import isa from "./assets/IMG6311.jpg";
-import GIF1 from "./assets/Создание GIF анимации.gif";
-import GIF2 from "./assets/Создание GIF анимации (1).gif";
-import GIF3 from "./assets/Gif from Online Converting.gif";
-import GIF4 from "./assets/Гифка.gif";
-import GIF5 from "./assets/GIF Animation.gif";
-import GIF6 from "./assets/Gif from Online Converting (1).gif";
-import GIF7 from "./assets/Gif from Online Converting (2).gif";
-import GIF8 from "./assets/Гифка из онлайн конвертера.gif";
-import GIF9 from "./assets/гиф9.gif ";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import isa from "./assets/IMG6311.jpg";
+import GIF_PARKING from "./assets/Gif from Online Converting (2).gif";
+import GIF_POSE from "./assets/гиф9.gif";
+import GIF_NOTION from "./assets/Gif from Online Converting (1).gif";
+import GIF_TS from "./assets/Создание GIF анимации (1).gif";
+
+const Q = (v) => `"${v}"`;
+const EMAIL = "isahangasanov84@gmail.com";
+
+const PROJECTS = [
+  {
+    key: "parking",
+    name: "MyParking",
+    img: GIF_PARKING,
+    stack: ["React", "Yandex Maps API", "Hackathon"],
+    repo: "https://github.com/Isahannn/SmartParking-hackathon.git",
+  },
+  {
+    key: "pose",
+    name: "Pose Analyze",
+    img: GIF_POSE,
+    stack: ["Python", "Computer Vision", "Datasets"],
+    repo: "https://github.com/Isahannn/Fitness-app.git",
+  },
+  {
+    key: "notion",
+    name: "Notion (Redux)",
+    img: GIF_NOTION,
+    stack: ["REST API", "json-server", "Redux"],
+    repo: "https://github.com/Isahannn/todos-server-redux-.git",
+  },
+  {
+    key: "ts",
+    name: "Filterable List",
+    img: GIF_TS,
+    stack: ["TypeScript", "Async", "Error handling"],
+    repo: "https://github.com/Isahannn/TypeScript.git",
+  },
+];
+
+const SKILLS = [
+  {
+    group: "backend",
+    items: ["Python", "Django", "REST API design", "Request validation (zod)"],
+  },
+  { group: "lang", items: ["Python", "JavaScript", "TypeScript"] },
+  { group: "tools", items: ["Git", "GitHub", "json-server"] },
+  { group: "front", items: ["React", "Redux", "TailwindCSS"] },
+];
+
+const MARQUEE = [
+  "Python",
+  "Django",
+  "REST API",
+  "JavaScript",
+  "TypeScript",
+  "Git",
+  "React",
+  "Redux",
+  "Algorithms",
+  "API design",
+];
+
+const reducedMotion = () =>
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/** Types out each phrase, pauses, deletes it, then moves to the next. */
+function useTyped(phrases) {
+  const [text, setText] = useState(reducedMotion() ? (phrases[0] ?? "") : "");
+
+  useEffect(() => {
+    if (!phrases.length || reducedMotion()) {
+      setText(phrases[0] ?? "");
+      return undefined;
+    }
+    let index = 0;
+    let pos = 0;
+    let deleting = false;
+    let timer;
+
+    const tick = () => {
+      const full = phrases[index];
+      pos += deleting ? -1 : 1;
+      setText(full.slice(0, pos));
+      let delay = deleting ? 25 : 55;
+      if (!deleting && pos === full.length) {
+        deleting = true;
+        delay = 1600;
+      } else if (deleting && pos === 0) {
+        deleting = false;
+        index = (index + 1) % phrases.length;
+        delay = 350;
+      }
+      timer = setTimeout(tick, delay);
+    };
+    timer = setTimeout(tick, 400);
+    return () => clearTimeout(timer);
+  }, [phrases]);
+
+  return text;
+}
+
+/** Fades children in once they scroll into view. */
+function Reveal({
+  as: Tag = "div",
+  delay = 0,
+  className = "",
+  children,
+  ...rest
+}) {
+  const ref = useRef(null);
+  const [shown, setShown] = useState(false);
+  const [settled, setSettled] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || reducedMotion() || !("IntersectionObserver" in window)) {
+      setShown(true);
+      return undefined;
+    }
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setShown(true);
+          io.disconnect();
+        }
+      },
+      { threshold: 0.12 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
+  return (
+    <Tag
+      ref={ref}
+      className={`reveal ${shown ? "in" : ""} ${className}`}
+      onTransitionEnd={() => shown && setSettled(true)}
+      style={{ transitionDelay: settled ? "0ms" : `${delay}ms` }}
+      {...rest}
+    >
+      {children}
+    </Tag>
+  );
+}
+
+function SectionTitle({ index, children }) {
+  return (
+    <h2 className="sectionTitle">
+      <span className="sectionIndex">{index}</span>
+      {children}
+    </h2>
+  );
+}
 
 function App() {
   const { t, i18n } = useTranslation();
-  const handlePrint = () => {
-    window.print();
-  };
+  const lang = i18n.resolvedLanguage === "ru" ? "ru" : "en";
+  const phrases = t("hero.typed", { returnObjects: true });
+  const typed = useTyped(phrases);
+  const experience = t("experience.items", { returnObjects: true });
+  const languages = t("languages.items", { returnObjects: true });
+
+  useEffect(() => {
+    document.documentElement.lang = lang;
+  }, [lang]);
+
+  const progressRef = useRef(null);
+  useEffect(() => {
+    const onScroll = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      progressRef.current?.style.setProperty(
+        "--p",
+        max > 0 ? window.scrollY / max : 0,
+      );
+    };
+    const onMove = (e) => {
+      const card = e.target.closest?.(".spot");
+      if (!card) return;
+      const r = card.getBoundingClientRect();
+      const x = e.clientX - r.left;
+      const y = e.clientY - r.top;
+      card.style.setProperty("--mx", `${x}px`);
+      card.style.setProperty("--my", `${y}px`);
+      if (card.classList.contains("project") && !reducedMotion()) {
+        card.style.setProperty("--ry", `${(x / r.width - 0.5) * 8}deg`);
+        card.style.setProperty("--rx", `${(0.5 - y / r.height) * 8}deg`);
+      }
+    };
+    const onLeave = (e) => {
+      const card = e.target.closest?.(".project");
+      card?.style.setProperty("--rx", "0deg");
+      card?.style.setProperty("--ry", "0deg");
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("mousemove", onMove, { passive: true });
+    document.addEventListener("mouseout", onLeave);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("mousemove", onMove);
+      document.removeEventListener("mouseout", onLeave);
+    };
+  }, []);
+
   return (
-    <div className="container">
-      <header className="header">
-        <div className="profile">
-          <img src={isa} alt="Isahan Gasanov" className="photo" />
+    <div className="page">
+      <div className="progress" ref={progressRef} aria-hidden="true" />
+      <div className="bgGlow" aria-hidden="true" />
 
-          <div className="heroText">
-            <h1 className="title">Isahan Gasanov</h1>
+      <nav className="nav">
+        <span className="navLogo">
+          <span className="navPrompt">$</span> isahan
+        </span>
+        <div className="navLinks">
+          {["about", "experience", "projects", "skills"].map((id) => (
+            <a key={id} href={`#${id}`}>
+              {t(`nav.${id}`)}
+            </a>
+          ))}
+        </div>
+        <div className="langSwitch" role="group" aria-label="Language">
+          {["en", "ru"].map((code) => (
+            <button
+              key={code}
+              type="button"
+              className={lang === code ? "active" : ""}
+              onClick={() => i18n.changeLanguage(code)}
+            >
+              {code.toUpperCase()}
+            </button>
+          ))}
+        </div>
+      </nav>
 
-            <p className="subtitle">
-              Frontend Developer | React | TypeScript | Django
-            </p>
-
-            <div className="heroButtons">
-              <button onClick={handlePrint} className="printButton">
-                {t("download")}
-              </button>
-
-              <select
-                className="languageSelect"
-                onChange={(e) => i18n.changeLanguage(e.target.value)}
-                defaultValue={i18n.language}
-              >
-                <option value="en">🇬🇧 English</option>
-                <option value="ru">🇷🇺 Русский</option>
-              </select>
-            </div>
+      <header className="hero">
+        <div className="heroText">
+          <p className="heroKicker">
+            <span className="pulse" /> {t("location")}
+          </p>
+          <h1 className="heroName">Isahan Gasanov</h1>
+          <p className="heroRole">{t("hero.role")}</p>
+          <p className="heroTyped" aria-live="off">
+            <span className="heroPrompt">&gt;</span> {typed}
+            <span className="caret" />
+          </p>
+          <p className="heroTypedPrint">
+            <span className="heroPrompt">&gt;</span> {phrases.join(" · ")}
+          </p>
+          <div className="heroButtons">
+            <a href="#projects" className="btn btnPrimary">
+              {t("hero.cta")}
+            </a>
+            <a href={`mailto:${EMAIL}`} className="btn btnGhost">
+              {t("hero.contact")}
+            </a>
+            <button
+              type="button"
+              className="btn btnGhost noPrint"
+              onClick={() => window.print()}
+            >
+              {t("download")}
+            </button>
+          </div>
+          <div className="heroLinks">
+            <a
+              href="https://github.com/Isahannn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              GitHub
+            </a>
+            <a
+              href="https://t.me/isahannn"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Telegram
+            </a>
+            <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
           </div>
         </div>
+
+        <div className="heroSide">
+          <div className="photoWrap">
+            <img src={isa} alt="Isahan Gasanov" className="photo" />
+          </div>
+          <pre className="codeCard" aria-hidden="true">
+            <code>
+              <span className="c-dim">GET</span> /api/developer{"\n{\n  "}
+              <span className="c-key">{Q("name")}</span>:{" "}
+              <span className="c-str">{Q("Isahan Gasanov")}</span>,{"\n  "}
+              <span className="c-key">{Q("stack")}</span>: [
+              <span className="c-str">{Q("Python")}</span>,{" "}
+              <span className="c-str">{Q("Django")}</span>],{"\n  "}
+              <span className="c-key">{Q("api")}</span>:{" "}
+              <span className="c-str">{Q("REST")}</span>,{"\n  "}
+              <span className="c-key">{Q("status")}</span>:{" "}
+              <span className="c-num">200</span>
+              {"\n}"}
+            </code>
+          </pre>
+        </div>
       </header>
-      <select
-        className="languageSelect"
-        aria-label="Language"
-        onChange={(e) => i18n.changeLanguage(e.target.value)}
-        defaultValue={i18n.language}
-      >
-        <option value="en">English</option>
-        <option value="ru">Русский</option>
-      </select>
+
+      <div className="marquee" aria-hidden="true">
+        <div className="marqueeTrack">
+          {[...MARQUEE, ...MARQUEE].map((w, i) => (
+            <span key={i}>{w}</span>
+          ))}
+        </div>
+      </div>
+
       <main className="main">
-        <section className="content">
-          <section className="section">
-            <p className="text">
-              As a passionate front-end developer, I am dedicated to crafting
-              visually appealing and user-friendly interfaces. With experience
-              in designing and implementing responsive, cross-browser web pages,
-              I aim to provide exceptional user experiences. My focus is on
-              creating seamless, engaging, and efficient interfaces through
-              careful attention to detail and a deep understanding of design
-              principles and user interaction. I work with modern technologies
-              and frameworks to build dynamic, interactive web pages that
-              combine functionality and aesthetics. I excel in collaborative
-              environments, effectively communicating with designers,
-              developers, and stakeholders to bring projects to life. Regardless
-              of the projects scale, I strive to deliver high-quality,
-              innovative solutions that enhance user engagement and
-              satisfaction.
-            </p>
-          </section>
-          <section>
-            <h2 className="experience">{t("work")} </h2>
-            <article className="article">
-              <h3 className="subTitle">
-                Freelance Web Developer and Designer (2019-2024)
-              </h3>
-              <p>
-                Over the past four years, I specialized in front-end web
-                development, using HTML, CSS, and JavaScript to build responsive
-                and visually appealing websites. I also utilized Figma for
-                designing user interfaces and wireframes. Additionally, I have
-                experience working with React and Python Django to create robust
-                and scalable web applications. My key responsibilities included:
-              </p>
-              <ul className="list">
-                <li className="mb-2">
-                  Web Development: Writing clean and efficient HTML, CSS, and
-                  JavaScript.
-                </li>
-                <li className="mb-2">
-                  React Development: Building dynamic and interactive user
-                  interfaces using React, including state management and
-                  component-based architecture.
-                </li>
-                <li className="mb-2">
-                  Python Django: Developing back-end services and RESTful APIs
-                  using Django, enabling seamless integration between front-end
-                  and back-end systems.
-                </li>
-                <li className="mb-2">
-                  Design: Creating intuitive designs in Figma.
-                </li>
-                <li className="mb-2">
-                  Client Collaboration: Understanding and translating client
-                  needs into effective digital solutions.
-                </li>
-                <li className="mb-2">
-                  Responsive Design: Ensuring cross-browser and device
-                  compatibility.
-                </li>
-              </ul>
-              <p>
-                Check out one of my projects:
-                <a
-                  href="https://effervescent-clafoutis-219ffd.netlify.app/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="projectLink"
-                >
-                  MyParking.by
-                </a>
-              </p>
-            </article>
-            <article className="article">
-              <h3 className="subTitle">BSU Student Developer (2023-Present)</h3>
-              <p>
-                Since 2023, I have been studying at BSU and working on various
-                exciting projects that are widely utilized. These projects
-                include:
-              </p>
-              <ul className="list">
-                <li className="mb-2">
-                  Multi-Page Applications: Developed complex multi-page
-                  applications with dynamic routing.
-                </li>
-                <li className="mb-2">
-                  Filtered Applications: Built applications with advanced
-                  filtering, search, and validation features.
-                </li>
-                <li className="mb-2">
-                  Database Integration: Implemented applications with JSON
-                  server and Redux for state management.
-                </li>
-                <li className="mb-2">
-                  TypeScript: Utilized TypeScript for enhanced type safety and
-                  maintainability.
-                </li>
-                <li className="mb-2">
-                  TailwindCSS: Employed TailwindCSS for rapid and responsive UI
-                  design.
-                </li>
-              </ul>
-            </article>
-          </section>
-          <section className="media-section">
-            <h2 className="mediaTitle">Project Showcase</h2>
-            <div className="mediaGrid">
-              <div className="mediaBlock">
-                <img src={GIF6} alt="Project 6" className="mediaImage" />
-                <h3 className="mediaName">Notion(REDUX)</h3>
-                <p className="mediaDescription">
-                  Collaborative Notes Application is a multi-user note-taking
-                  app built with React, TailwindCSS, Redux, and json-server. It
-                  features user management, robust notes management, pagination,
-                  search, sorting, and responsive design. Perfect for modern
-                  development practices and exploring advanced tech stack
-                  functionalities.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/todos-server-redux-.git"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
+        <Reveal as="section" id="about" className="section">
+          <SectionTitle index="01">{t("about.title")}</SectionTitle>
+          <p className="aboutText">{t("about.text")}</p>
+        </Reveal>
+
+        <section id="experience" className="section">
+          <Reveal>
+            <SectionTitle index="02">{t("experience.title")}</SectionTitle>
+          </Reveal>
+          <div className="timeline">
+            {experience.map((job, i) => (
+              <Reveal key={job.role} delay={i * 120} className="job spot">
+                <span className="jobDot" />
+                <div className="jobHead">
+                  <h3>{job.role}</h3>
+                  <span className="jobPeriod">{job.period}</span>
                 </div>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF9} alt="Project 8" className="mediaImage" />
-                <h3 className="mediaName"> Pose Analyz </h3>
-                <p className="mediaDescription">
-                  A human pose analysis application based on datasets, designed
-                  to detect body keypoints, process images, and analyze human
-                  movements using modern computer vision techniques.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/Fitness-app.git"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF7} alt="Project 7" className="mediaImage" />
-                <h3 className="mediaName">MyParking</h3>
-                <p className="mediaDescription">
-                  MyParking Application is a web solution built with React,
-                  TailwindCSS, and Yandex Maps API. It offers real-time updates
-                  on available parking spaces, providing users with an
-                  efficient, user-friendly interface for locating parking spots.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/SmartParking-hackathon.git"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF1} alt="Project 1" className="mediaImage" />
-                <h3 className="mediaName">API(JS)</h3>
-                <p className="mediaDescription">
-                  User Albums SPA is a multi-page web application built as a
-                  Single Page Application (SPA). It uses hash-based routing to
-                  display user lists, user albums, and album photos with
-                  infinite scroll. The project is structured for clarity and
-                  maintainability.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/API"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF2} alt="Project 2" className="mediaImage" />
-                <h3 className="mediaName">TypeScript</h3>
-                <p className="mediaDescription">
-                  Filterable List - TypeScript Edition rewrites an asynchronous
-                  Filterable List application from JavaScript to TypeScript for
-                  improved type safety and maintainability. It features
-                  asynchronous data fetching, user-based filtering, robust error
-                  handling, and a modular architecture.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/TypeScript.git"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF3} alt="Project 3" className="mediaImage" />
-                <h3 className="mediaName">CV-BSU-WEB-Designed</h3>
-                <p className="mediaDescription">
-                  My Unique Resume from BSU features projects such as CSS
-                  Gallery, Interactive Map, Piggy Website, Musical Apps, Data
-                  Tables, Business Card, Landing Page, and Block Layout and
-                  Transitions. This showcases my web development journey and the
-                  skills I've developed.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/Isahannn-CV-BSU-WEB-Designed.git"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF4} alt="Project 4" className="mediaImage" />
-                <h3 className="mediaName">TODO list</h3>
-                <p className="mediaDescription">
-                  TODO List Application helps users add, manage, and filter
-                  tasks. It features input fields for task title and
-                  description, status checkboxes, delete options, and a filter
-                  for incomplete tasks. The application is structured into
-                  modular components with a clean interface.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/Todo-List-Gasanov.git"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF5} alt="Project 5" className="mediaImage" />
-                <h3 className="mediaName">Notion</h3>
-                <p className="mediaDescription">
-                  Collaborative Notes Application is a multi-user note-taking
-                  app built with React, TailwindCSS, and json-server. It
-                  features user management, robust notes management, pagination,
-                  search, sorting, and responsive design. Perfect for organizing
-                  thoughts and exploring modern development practices.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/todos-server.git"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-              <div className="mediaBlock">
-                <img src={GIF8} alt="Project 8" className="mediaImage" />
-                <h3 className="mediaName">Todo with filters</h3>
-                <p className="mediaDescription">
-                  Todoist Application with Advanced Task Filtering is a task
-                  management app with complex filtering capabilities. Built with
-                  React and styled using TailwindCSS, CSS modules, or SCSS
-                  modules, it allows for creating, managing, and filtering tasks
-                  with ease. The app supports advanced filters and is optimized
-                  for performance.
-                </p>
-                <div className="mediaLinkContainer">
-                  <a
-                    href="https://github.com/Isahannn/Todoist.git"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="mediaLink"
-                  >
-                    View Project
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
+                <ul className="jobList">
+                  {job.bullets.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
         </section>
-        <aside className="aside">
-          <section className="asideSection">
-            <p className="asideText">Minsk, Belarus 🇧🇾</p>
-            <a href="mailto:isahangasanov84@gmail.com" className="email">
-              isahangasanov84@gmail.com ✉️
-            </a>
-          </section>
-          <section>
-            <h2 className="asideTitle">Education</h2>
-            <p className="asideText">
-              BSU - Mechanics-Mathematics Faculty <br />
-              2023-now
+
+        <section id="projects" className="section">
+          <Reveal>
+            <SectionTitle index="03">{t("projects.title")}</SectionTitle>
+          </Reveal>
+          <div className="projectGrid">
+            {PROJECTS.map((p, i) => (
+              <Reveal
+                key={p.key}
+                delay={(i % 2) * 120}
+                className="project spot"
+              >
+                <div className="projectMedia">
+                  <img src={p.img} alt={p.name} loading="lazy" />
+                </div>
+                <div className="projectBody">
+                  <h3>{p.name}</h3>
+                  <p>{t(`projects.items.${p.key}`)}</p>
+                  <ul className="tags">
+                    {p.stack.map((s) => (
+                      <li key={s}>{s}</li>
+                    ))}
+                  </ul>
+                  <a
+                    href={p.repo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="projectLink"
+                  >
+                    {t("projects.view")} <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <section id="skills" className="section">
+          <Reveal>
+            <SectionTitle index="04">{t("skills.title")}</SectionTitle>
+          </Reveal>
+          <div className="skillGrid">
+            {SKILLS.map((g, i) => (
+              <Reveal key={g.group} delay={i * 90} className="skillCard spot">
+                <h3>{t(`skills.groups.${g.group}`)}</h3>
+                <ul className="tags">
+                  {g.items.map((s) => (
+                    <li key={s}>{s}</li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
+          </div>
+        </section>
+
+        <Reveal as="section" className="section split">
+          <div>
+            <h2 className="miniTitle">{t("education.title")}</h2>
+            <p className="eduSchool">{t("education.school")}</p>
+            <p className="eduMeta">
+              {t("education.faculty")} · {t("education.period")}
             </p>
-          </section>
-          <section>
-            <h2 className="asideTitle">Technical Skills</h2>
-            <ul className="ul">
-              <li className="mb-2">HTML, CSS, JavaScript</li>
-              <li className="mb-2">React, Redux</li>
-              <li className="mb-2">Redux--thunk</li>
-              <li className="mb-2">Python, Django</li>
-              <li className="mb-2">Figma, Adobe XD</li>
-              <li className="mb-2">Git, GitHub</li>
-              <li className="mb-2">zod</li>
-              <li className="mb-2">TailwindCSS</li>
-              <li className="mb-2">shortid</li>
-              <li className="mb-2">Chance</li>
-              <li className="mb-2">CSS Modules</li>
+          </div>
+          <div>
+            <h2 className="miniTitle">{t("languages.title")}</h2>
+            <ul className="langList">
+              {languages.map((l) => (
+                <li key={l.name}>
+                  <div className="langRow">
+                    <span>{l.name}</span>
+                    <span className="langLevel">{l.level}</span>
+                  </div>
+                  <div className="bar">
+                    <span style={{ "--w": `${l.value}%` }} />
+                  </div>
+                </li>
+              ))}
             </ul>
-          </section>
-          <section>
-            <h2 className="asideTitle">Certifications</h2>
-            <ul className="ul">
-              <li className="mb-2">Certified JavaScript Developer</li>
-              <li className="mb-2">React Developer Certification</li>
-              <li className="mb-2">Python for Web Development</li>
-            </ul>
-          </section>
-          <section>
-            <h2 className="asideTitle">Languages</h2>
-            <ul className="ul">
-              <li className="mb-2">
-                Russian - C1 <span className="flag">🇷🇺</span>
-              </li>
-              <li className="mb-2">
-                Azerbaijani - C1 <span className="flag">🇦🇿</span>
-              </li>
-              <li className="mb-2">
-                Turkish - B2 <span className="flag">🇹🇷</span>
-              </li>
-              <li className="mb-2">
-                English - B2 <span className="flag">🇬🇧</span>
-              </li>
-            </ul>
-          </section>
-          <section>
-            <h2 className="asideTitle">Interests</h2>
-            <ul className="ul">
-              <li className="mb-2">Web Development</li>
-              <li className="mb-2">Traveling</li>
-              <li className="mb-2">Reading Technology Blogs</li>
-              <li className="mb-2">Participating in Coding Hackathons</li>
-            </ul>
-          </section>
-        </aside>
+          </div>
+        </Reveal>
       </main>
+
       <footer className="footer">
-        <a
-          href="https://t.me/isahannn"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footerLink"
-        >
-          Telegram
-        </a>
-        <a
-          href="https://github.com/Isahannn"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="footerLink"
-        >
-          GitHub
-        </a>
-        <a href="mailto:isahangasanov84@gmail.com" className="footerLink">
-          Gmail
-        </a>
+        <span>© {new Date().getFullYear()} Isahan Gasanov</span>
+        <a href={`mailto:${EMAIL}`}>{EMAIL}</a>
       </footer>
     </div>
   );
